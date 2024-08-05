@@ -3,7 +3,6 @@ from Method_Newt import *
 from Method_Sec import *
 from func_main import *
 import pandas as pd
-import openpyxl
 
 # Teste da função
 C = 1
@@ -22,7 +21,7 @@ df_sec = pd.DataFrame(sec_db)
 
 print(f'from Method PF: {raiz_mpf} ---> {viabilidade(raiz_mpf)}')
 print(df_mpf)
-print(f'\nFrom Method Newton: {raiz_newt}')
+print(f'\nFrom Method Newton: {raiz_newt} ---> {viabilidade(raiz_newt)}')
 print(df_newt)
-print(f'\nFrom Method Secante: {raiz_sec}')
+print(f'\nFrom Method Secante: {raiz_sec} ---> {viabilidade(raiz_sec)}')
 print(df_sec)
