@@ -1,0 +1,34 @@
+digraph G {
+    node [shape=box, style=rounded];
+
+    Start [label="Início"];
+    DefinePhi [label="Definir Função phi"];
+    DefinePontoFixo [label="Definir valor inicial"];
+    CheckInitialErr [label="Verificar se |f(x0)| < err"];
+    InsertInitialData [label="Retornar x0"];
+    StartLoop [label="Iniciar Iterações"];
+    CalculateX2 [label="Calcular x2 com a função phi"];
+    CheckConvergence [label="Verificar se |f(x2)| < err ou |x2 - x1| < err"];
+    ReturnX2 [label="Retornar x2"];
+    UpdateX1 [label="Atualizar x1 com x2"];
+    ContinueLoop [label="Continuar Iterações"];
+    EndLoop [label="Fim do Loop"];
+    ReturnX1 [label="Retornar x1"];
+    End [label="Fim"];
+
+    Start -> DefinePhi;
+    DefinePhi -> DefinePontoFixo;
+    DefinePontoFixo -> CheckInitialErr;
+    CheckInitialErr -> InsertInitialData [label="Sim"];
+    CheckInitialErr -> StartLoop [label="Não"];
+    InsertInitialData -> End;
+    StartLoop -> CalculateX2;
+    CalculateX2 -> CheckConvergence;
+    CheckConvergence -> ReturnX2 [label="Sim"];
+    CheckConvergence -> UpdateX1 [label="Não"];
+    ReturnX2 -> End;
+    UpdateX1 -> ContinueLoop;
+    ContinueLoop -> StartLoop;
+    EndLoop -> ReturnX1;
+    ReturnX1 -> End;
+}

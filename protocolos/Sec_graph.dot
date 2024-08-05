@@ -1,0 +1,33 @@
+digraph G {
+    node [shape=box, style=rounded];
+
+    Start [label="Início"];
+    DefineAnaliseSinais [label="Análise teórica para x1"];
+    CheckInitialX0 [label="Verificar se |f(x0)| < err1"];
+    InsertX0Data [label="Retornar x0"];
+    CheckInitialX1 [label="Verificar se |f(x1)| < err1 ou |x1 - x0| < err2"];
+    InsertX1Data [label="Retornar x1"];
+    StartSecanteLoop [label="Iniciar Loop de Iterações"];
+    CalculateX2 [label="Calcular x2 com Método da Secante"];
+    CheckSecanteConvergence [label="Verificar se |f(x2)| < err1 ou |x2 - x1| < err2"];
+    ReturnX2 [label="Retornar x2"];
+    UpdateX0X1 [label="Atualizar x0 e x1"];
+    IncrementK [label="Incrementar k"];
+
+    Start -> DefineAnaliseSinais;
+    DefineAnaliseSinais -> CheckInitialX0;
+    CheckInitialX0 -> InsertX0Data [label="Sim"];
+    CheckInitialX0 -> CheckInitialX1 [label="Não"];
+    InsertX0Data -> End;
+    CheckInitialX1 -> InsertX1Data [label="Sim"];
+    CheckInitialX1 -> StartSecanteLoop [label="Não"];
+    InsertX1Data -> End;
+    
+    StartSecanteLoop -> CalculateX2;
+    CalculateX2 -> CheckSecanteConvergence;
+    CheckSecanteConvergence -> ReturnX2 [label="Sim"];
+    CheckSecanteConvergence -> UpdateX0X1 [label="Não"];
+    ReturnX2 -> End;
+    UpdateX0X1 -> IncrementK;
+    IncrementK -> StartSecanteLoop;   
+}
